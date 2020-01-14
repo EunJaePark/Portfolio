@@ -88,16 +88,24 @@
 
                                 <div class="form-group">
                                     <div class="col-md-2">
-                                        <strong>State:</strong>
+                                        <strong>주:</strong>
                                         <select v-model="order.state" class="form-control">
-                                            <option disabled value="">State</option>
-                                            <option v-bind:value="state.AL">AL</option>
-                                            <option v-bind:value="state.AR">AR</option>
-                                            <option v-bind:value="state.CA">CA</option>
-                                            <option v-bind:value="state.NV">NV</option>
+                                            <option disabled value="">주</option>
+                                            <option v-for="(state, key) in states" v-bind:value="state">
+                                                {{key}}
+                                            </option>
+                                            <option value="알라바마">AL</option>
+                                            <option value="알래스카">AK</option>
+                                            <option value="애리조나">AR</option>
+                                            <option value="캘리포니아">CA</option>
+                                            <option value="네바다">NV</option>
                                         </select>
                                     </div>
                                 </div>
+
+                                <ol>
+                                    <li v-for="state in states">{{state}}</li>
+                                </ol>
 
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
@@ -170,12 +178,13 @@
                 sendGift: '선물로 보내기',
                 dontSendGift: '선물로 보내지 않기'
             },
-            state: {
-                AL: '알라바마',
-                AR: '애리조나',
-                CA: '캘리포니아',
-                NV: '네바다'
-            },
+            state: [
+                '알라바마',
+                '알래스카',
+                '애리조나',
+                '캘리포니아',
+                '네바다'
+            ],
             sitename: 'Vue.js 애완용품샵',
             product: {
                 id: 1001,
