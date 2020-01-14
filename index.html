@@ -88,13 +88,13 @@
 
                                 <div class="form-group">
                                     <div class="col-md-2">
-                                        <strong>주:</strong>
+                                        <strong>State:</strong>
                                         <select v-model="order.state" class="form-control">
-                                            <option disabled value="">주</option>
-                                            <option>AL</option>
-                                            <option>AR</option>
-                                            <option>CA</option>
-                                            <option>NV</option>
+                                            <option disabled value="">State</option>
+                                            <option v-bind:value="state.AL">AL</option>
+                                            <option v-bind:value="state.AR">AR</option>
+                                            <option v-bind:value="state.CA">CA</option>
+                                            <option v-bind:value="state.NV">NV</option>
                                         </select>
                                     </div>
                                 </div>
@@ -115,9 +115,9 @@
                                 
                                 <div class="form-group">
                                     <div class="col-md-6 boxes">
-                                        <input type="radio" id="home" value="home" v-model="order.method">
+                                        <input type="radio" id="home" v-bind:value="order.home" v-model="order.method">
                                         <label for="home">자택</label>
-                                        <input type="radio" id="Business" value="Business" v-model="order.method">
+                                        <input type="radio" id="Business" v-bind:value="order.business" v-model="order.method">
                                         <label for="business">직장</label>
                                     </div>
                                 </div>
@@ -164,9 +164,17 @@
                 zip: '',
                 state: '',
                 method: '자택',
+                business: '직장 주소',
+                home: '자택 주소',
                 gift: '선물로 보내기',
                 sendGift: '선물로 보내기',
                 dontSendGift: '선물로 보내지 않기'
+            },
+            state: {
+                AL: '알라바마',
+                AR: '애리조나',
+                CA: '캘리포니아',
+                NV: '네바다'
             },
             sitename: 'Vue.js 애완용품샵',
             product: {
