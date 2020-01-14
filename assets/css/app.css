@@ -30,3 +30,10 @@ body {
     font-size: 150%;
     margin-top: 50px;
 }
+
+/*체크아웃 박스 위치 변경*/
+div.navbar-nav{
+    position:absolute;
+    top:0;
+    left:850px;
+}

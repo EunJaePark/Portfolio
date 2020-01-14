@@ -51,9 +51,99 @@
                     </div>
                 </div>
                 
-                <div v-else></div>
-                
-                
+                <div v-else>
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">애완용품샵 체크아웃</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h4><strong>정보를 입력하세요</strong></h4>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <strong>이름:</strong>
+                                    <input v-model="order.firstName" class="form-control" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <strong>성:</strong>
+                                    <input v-model="order.lastName" class="form-control" />
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>주소:</strong></div>
+                                    <div class="col-md-12">
+                                        <input v-model="order.address" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>도시:</strong></div>
+                                    <div class="col-md-12">
+                                        <input v-model="order.city" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        <strong>주:</strong>
+                                        <select v-model="order.state" class="form-control">
+                                            <option disabled value="">주</option>
+                                            <option>AL</option>
+                                            <option>AR</option>
+                                            <option>CA</option>
+                                            <option>NV</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <strong>우편번호:</strong>
+                                        <input v-model="order.zip" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 boxes">
+                                        <input type="checkbox" id="gift" value="true" v-bind:true-value="order.sendGift" v-bind:false-value="order.dontSendGift" v-model="order.gift" />
+                                        <label for="gift">선물로 보내기?</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-6 boxes">
+                                        <input type="radio" id="home" value="home" v-model="order.method">
+                                        <label for="home">자택</label>
+                                        <input type="radio" id="Business" value="Business" v-model="order.method">
+                                        <label for="business">직장</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary submit" v-on:click="submitForm">주문하기</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 verify">
+                                    <pre>
+                                        이름: {{order.firstName}}
+                                        성: {{order.lastName}}
+                                        주소: {{order.address}}
+                                        도시: {{order.city}}
+                                        우편번호: {{order.zip}}
+                                        주: {{order.state}}
+                                        주소지: {{order.method}}
+                                        선물: {{order.gift}}
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>              
             </div>
         </main>
     </div>
@@ -66,6 +156,18 @@
         el: '#app',
         data: {
             showProduct: true,
+            order: {
+                firstName: '',
+                lastName: '',
+                address: '',
+                city: '',
+                zip: '',
+                state: '',
+                method: '자택',
+                gift: '선물로 보내기',
+                sendGift: '선물로 보내기',
+                dontSendGift: '선물로 보내지 않기'
+            },
             sitename: 'Vue.js 애완용품샵',
             product: {
                 id: 1001,
@@ -111,6 +213,9 @@
             },
             showCheckout() {
                 this.showProduct = this.showProduct ? false : true;
+            },
+            submitForm() {
+                alert('제출완료');
             }
         },
         beforeCreate: function() {
