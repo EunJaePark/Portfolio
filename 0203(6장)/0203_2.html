@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>속성 검증하기 (전역/지역컴포넌트)</title>
+
+    <script src="https://unpkg.com/vue" type="text/javascript"></script>
+</head>
+<body>
+
+    <div id="app">
+        <my-component v-bind:num="myNumber" v-bind:str="passedString" v-bind:even="myNumber" v-bind:obj="passedObject"></my-component>
+    </div>
+
+    <script type="text/javascript">
+    const MyComponent = {
+        template: '<div>숫자: {{num}}<br/>문자열: {{str}} \ <br/>짝수?: {{even}}<br/>객체: {{obj.message}} </div>',
+        props: {
+            num: {
+                type: Number,
+                required: true
+            },
+            str: {
+                type: String,
+                default: '안녕'
+            }
+        },
+        obj: {
+            type: Object,
+            default: function() {
+                return {message : '안녕, 객체로부터'}
+            }
+        },
+        even: {
+            validator: function(value) {
+                return (value % 2 === 0)
+            }
+        }
+    }
+
+    new Vue({
+        el: '#app',
+        components: {'my-component': MyComponent},
+        data() {
+            return {
+                passedString: '안녕, 부모로부터!',
+                myNumber: 43,
+                passedObject: {message: '넘겨준 객체'}
+            }
+        }
+    });
+
+    </script>
+    
+</body>
+</html>

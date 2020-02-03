@@ -50,12 +50,33 @@
     //     }
     // });
 
-    //-----전역 카운터를 사용한 동적 속성-----
+    // //-----전역 카운터를 사용한 동적 속성(하나의 버튼을 누르면 모든 버튼의 수가 증가)-----
+    // const counter = {counter: 0};
+    // const MyComponent = {
+    //     template: '<div><button v-on:click="counter +=1"> {{counter}} </button></div>',
+    //     data() {
+    //         return counter;
+    //     }
+    // }
+
+    // new Vue({
+    //     el: '#app',
+    //     components: {'my-component': MyComponent},
+    //     data() {
+    //         return {
+    //             message: ''
+    //         }
+    //     }
+    // });
+
+    //-----전역 카운터를 사용한 동적 속성(하나의 버튼을 누르면 모든 버튼의 수가 증가하는 문제 해결)-----
     const counter = {counter: 0};
     const MyComponent = {
         template: '<div><button v-on:click="counter +=1"> {{counter}} </button></div>',
         data() {
-            return counter;
+            return {
+                counter: 0
+            }
         }
     }
 

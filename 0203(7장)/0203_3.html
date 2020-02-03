@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/vue"></script>
+<title>7.4 동적 컴포넌트 앱 생성</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="cycle">순환하기</button> <!--button누를 떄마다 cycle따라 순환.-->
+        <h1>
+            <component v-bind:is="currentView" /> <!--currentView는 BookComponent라고 newVue의 data에서 정의함.-->
+        </h1>
+    </div>
+
+<script>
+const BookComponent = {
+    template: `
+    <div>
+        책 컴포넌트
+    </div>
+    `
+}
+
+const FormComponent = {
+    template: `
+    <div>
+        폼 컴포넌트
+    </div>
+    `
+}
+
+const HeaderComponent = {
+    template: `
+    <div>
+        헤더 컴포넌트
+    </div>
+    `
+}
+
+new Vue({
+    el: '#app',
+    components: { //탬플릿의 <h1> 속의 <component>들.
+        'book-component': BookComponent,
+        'form-component': FormComponent,
+        'header-component': HeaderComponent
+    },  
+    data() {
+        return {
+            currentView: BookComponent
+        }
+    },
+    methods: {
+        cycle() {
+            if (this.currentView === HeaderComponent) { //HeaderComponent가 보이면 button 클릭시 BookComponent가 나오도록 함.
+                this.currentView = BookComponent
+            } else {
+                this.currentView = this.currentView === BookComponent ? FormComponent : HeaderComponent; //BookComponent가 true이면 FormComponent, false이면 HeaderComponent...
+                //즉, BookComponenet가 탬플릿에서 보이면(true) button을 클릭했을 때 FormComponent가 보이고, 탬플릿에서 BookComponent가 보이지 않으면 button클릭시 HeaderComponent가 나타나게 된다.
+            } 
+        }
+    }
+})
+</script>
+</body>
+</html>

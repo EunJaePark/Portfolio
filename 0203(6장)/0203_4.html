@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>text/x-template (전역/지역컴포넌트)</title>
+
+    <script src="https://unpkg.com/vue" type="text/javascript"></script>
+</head>
+<body>
+
+    <div id="app">
+        <my-component />
+    </div>
+
+    <script type="text/x-template" id="my-component">
+        <p>
+            안녕, x-template으로부터, 안녕
+        </p>
+    </script>
+
+    <script type="text/javascript">
+    const MyComponent = {
+        template: '#my-component'
+    };
+
+    new Vue({
+        el: '#app',
+        components: {'my-component': MyComponent}
+    });
+
+    </script>
+    
+</body>
+</html>

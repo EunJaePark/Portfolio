@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/vue"></script>
+<title>7.3범위슬롯</title>
+</head>
+<body>
+    <div id="app">
+        <book-component v-bind:books="books">
+            <h1 slot="header">{{header}}</h1>  <!--slot을 header로 지정-->
+            <template slot="book" slot-scope="props"> <!--slot를 book으로 지정.-->
+                <h2>
+                    <i>{{props.text.title}}</i>  <!--위에서 slot-scope를 props로 지정했기 때문에, props.text는 book과 같아지는 것.-->
+                    <small>by: {{props.text.author}}</small>
+                </h2>
+            </template>
+        </book-component>
+    </div>
+
+<script>
+const BookComponent = {
+    template: `
+    <div>
+        <slot name="header"></slot>
+        <slot name="book" v-for="book in books" v-bind:text="book"></slot>
+    </div>
+    `,
+    props: ['books']
+}
+
+new Vue({
+    el: '#app',
+    components: {'book-component': BookComponent},  //탬플릿에서 book-component로 지정한 것을 연결.
+    data() {
+        return {
+            header: '책 목록',
+            books: [ //탬플릿에서 v-bind:books="books"로 연결됨.
+                {author: 'John Smith', title: 'Best Of Times'},
+                {author: 'Jane Doe', title: 'Go West Young Man'},
+                {author: 'Avery Katz', title: 'The Life And Times Of Avery'}
+            ]
+        }
+    }
+})
+</script>
+</body>
+</html>

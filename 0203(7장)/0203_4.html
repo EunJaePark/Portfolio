@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/vue"></script>
+<title>7.5 비동기 컴포넌트 설정</title>
+</head>
+<body>
+    <div id="app">
+        <book-component></book-component>
+    </div>
+
+<script>
+const BookComponent = function(resolve, reject) {
+    setTimeout(function() {
+        resolve({
+            template: `
+            <div>
+                <h1>
+                비동기 컴포넌트
+                </h1>
+            </div>
+            `
+        });
+        reject({
+            template:
+        });
+    }, 1000);
+}
+
+new Vue({
+    el: '#app',
+    components: { 
+        'book-component': BookComponent
+    }
+})
+</script>
+</body>
+</html>
