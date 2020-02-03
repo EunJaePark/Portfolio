@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>전역/지역컴포넌트</title>
+
+    <script src="https://unpkg.com/vue" type="text/javascript"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- <my-component v-bind:text="message"></my-component> -->
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+    </div>
+
+    <script type="text/javascript">
+    // Vue.component('my-component', {
+    //     template: '<div>안녕, 전역 컴포넌트로부터</div>'
+    // });
+
+    //------리터럴 속성------
+    // const MyComponent = {
+    //     template: '<div>안녕 {{text}}! </div>',
+    //     props: ['text']
+    // }
+
+    // new Vue({
+    //     el: '#app',
+    //     components: {'my-Component': MyComponent}
+    // });
+
+
+    // //-----동적 속성-----
+    // const MyComponent = {
+    //     template: `<div>안녕 {{text}}! {{tester1}}</div>`,
+    //     props: ['text']
+    // };
+
+    // new Vue({
+    //     el:'#app',
+    //     components: {'my-component': MyComponent},
+    //     data() {
+    //         return {
+    //             message: '부모 컴포넌트로부터!'
+    //         }
+    //     }
+    // });
+
+    //-----전역 카운터를 사용한 동적 속성-----
+    const counter = {counter: 0};
+    const MyComponent = {
+        template: '<div><button v-on:click="counter +=1"> {{counter}} </button></div>',
+        data() {
+            return counter;
+        }
+    }
+
+    new Vue({
+        el: '#app',
+        components: {'my-component': MyComponent},
+        data() {
+            return {
+                message: ''
+            }
+        }
+    });
+
+    </script>
+    
+</body>
+</html>
