@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>vue 탭메뉴에 적용(기존 tab1-8파일)</title>
+
+<!--vue-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--axios(vue 전용 라이브러리)-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+
+<style>
+* {margin:0; padding:0}
+li {list-style: none}
+body {padding:50px;}
+
+.wrap {
+	width:90.196078%; /* 920 / 1020 */
+	margin:0 auto; 
+	background-color:lime; 
+	height: 500px;
+}
+.tab_menu {
+	border:2px solid black; 
+	width:54.130435%; /* 498 / 920 */
+	margin:0 auto;
+	overflow: hidden;
+	min-width: 400px;
+}
+.tab_menu > li {
+    float:left; 
+    background-color: #999;
+    width: calc( (100% - 8px) / 5) ; /* 98 / 498 */
+}
+.tab_menu > li > a {
+	display:block; 
+	line-height: 50px; 
+	text-align: center;
+	color:white;
+	text-decoration-line: none;
+}
+.tab_menu > li.on {
+	background-color:blue;
+}
+.tab_menu > li + li {
+	margin-left:2px;
+}
+.tab_content > div {
+	display: none;
+	margin:20px;
+	padding:20px;
+	background-color:blue;
+	color:white;
+	font-size:18px;
+}
+.tab_content > div.on {
+	display: block;
+	height: 300px;
+}
+</style>
+
+</head>
+<body>
+<div id="app" class="wrap">
+	<ul class="tab_menu">
+        <li
+            v-for="(item, i) in tabItems"
+            v-bind:class="setClass(i)"
+            v-bind:style="setColor(i)"
+            v-on:click.prevent="setState(i)"
+        ><a href="">{{ item.itemName }}</a></li>
+	</ul>
+	<div class="tab_content">
+        <div
+            v-for="(item, i) in tabItems"
+            v-bind:class="setClass(i)"
+            v-bind:style="setColor(i)"
+        >{{ item.itemContent }}</div>          
+	</div>
+</div>
+<script>
+// 받아와야하는 json데이터 주소.
+// * http://www.json-generator.com/api/json/get/ceFOzWDyEO?indent=4 ;
+
+new Vue({
+    el: '#app', 
+    data: {
+        tabItems: null,
+        tabState: 0,
+    },
+    methods: {
+        setClass(index) {
+            if(index === this.tabState) {
+                return 'on';
+            }
+        },
+        setColor(index) {
+            if(index === this.tabState) {
+                return `background-color:${this.tabItems[index].itemColor}`;
+            }
+        },
+        setState(index) {
+            this.tabState = index;
+        }
+    },
+    created() {
+        axios
+            .get('http://www.json-generator.com/api/json/get/ceFOzWDyEO?indent=4')
+            .then( (response) => {
+                this.tabItems = response.data.tabItems;
+            })
+    }
+});
+
+
+</script>
+</body>
+</html>
