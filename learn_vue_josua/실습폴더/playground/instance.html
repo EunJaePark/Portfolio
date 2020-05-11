@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // var options = {
+        //   el: '#app',
+        //   data: {
+        //       message: 'hi'
+        //   }
+        // }
+
+        // var vm = new Vue(options);
+
+        // 위에 적은 방식보다 아래처럼 적는게 가독성에 좋다.
+        var vm = new Vue({
+          el: '#app',
+          data: {
+              message: 'hi'
+          },
+          methods: {
+              
+          },
+          created: function() {}
+
+        });
+
+    </script>
+</body>
+</html>
