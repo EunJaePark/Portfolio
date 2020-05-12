@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <!-- router-link*2라고 입력하고 엔터키 누르면 router-link가 2개 생김. -->
+            <!-- router-link는 <a href="">로 이동하는 것처럼 라우터에서 페이지 이동을 위한 링크. -->
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>         
+        </div>
+        <!-- vue인스턴스에 router인스턴스를 연결해야만 사용할수 있음. -->
+        <router-view></router-view> 
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <!-- script:src라고 치고 엔터키누르면 자동완성됨. <script src=""></script> -->
+    <script>
+        var LoginComponent = {
+            template: '<div>login</div>'
+        }
+        var MainComponent = {
+            template: '<div>main</div>'
+        }
+
+        var router = new VueRouter({
+            // 페이지의 라우팅 정보가 routes라는 속성에 배열로 담김.
+            routes: [
+                // 로그인 페이지 정보
+                {
+                    // 페이지의 url 이름.
+                    path: '/login',
+                    // name: 'login', // 이렇게 이름을 부여했을 때, 더 의미있는 컴포넌트가 된다.
+                    // 해당 url에서 표시될 컴포넌트.
+                    component: LoginComponent // 여기서는 component에 s가 붙지 않는다. 해당 페이지마다 뿌려지는 컴포넌트는 하나이기 때문.
+                },
+                // 메인 페이지 정보
+                {
+                    path: '/main',
+                    component: MainComponent
+                }
+            ]
+        });
+
+        new Vue({
+            el: '#app',
+            // router속성(이건 마치 methods, data적듯이 정해져 있는것) : 위에서 정의한 router변수.
+            router: router,
+            components: {} // 여기서는 여러개의 컴포넌트를 등록하기 때문에 s가 붙음.
+        });
+    </script>
+</body>
+</html>
