@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p>
+        <!-- 이렇게 v-를 이용한 id나 class가 있으면 vue의 속성(데이터 등..)랑 연결되는 것. -->
+        <p>{{ doubleNum }}</p>
+        <div v-if="loading">
+            Loading...
+        </div>
+        <div v-else>
+            test user has been logged in
+        </div>
+        <div v-show="loading">
+            Loading....
+        </div>
+
+
+        <!-- TODO: 인풋 박스를 만들고 입력된 값을 p 태그에 출력해 보세요 -->
+        <input type="text" v-model="message">
+        <p>{{ message }}</p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                uuid: 'abc123456',
+                name: 'text-blue',
+                loading: true,
+                message: ''
+            },
+            computed: { // data값에 따라서 바뀌는 값을 정의할 때 computed를 사용하면 좋음.
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

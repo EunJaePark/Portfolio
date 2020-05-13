@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="getData">get user</button>
+        <div>{{users}}</div>
+    </div>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                users: []
+            },
+            methods: {
+                getData: function() {
+                    console.log(this);                
+                    // this axios를 호출하기 전의 this는 기본적인 인스턴스(data, methods..)나 컴포넌트를 가리킨다.
+                    var vm = this;
+                    axios.get('https://jsonplaceholder.typicode.com/users/')
+                    .then(function(response) { // 위의 axios데이터를 받아오는데 성공하면 실행됨.
+                        console.log(response.data);
+                        console.log(this);// 여기서(axios를 호출한 후) this는 비동기 처리를 했을때, 자연스럽게 실행 컨택스트가 달라지면서 this에 대한 내용도 바뀐다.  
+                        
+                        // 따라서, axios바깥에서 this를 선언해주고 선언한 이름으로 사용하면 된다.
+                        vm.users = response.data; 
+
+                        // this를 그대로 쓰고싶으면 .then에서 arrow함수를 써야한다.
+                        // this.users = response.data; 
+                    })
+                    .catch(function(err) { // 위의 axios데이터를 받아오는데 실패하면 실행됨.
+                        console.log(err);
+                        
+                    })
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
