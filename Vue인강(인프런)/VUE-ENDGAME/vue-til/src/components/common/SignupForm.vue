@@ -21,7 +21,7 @@
     <p>{{ logMessage }}</p>
 
     <!-- id가 형식에 안맞을 경우 화면에 메세지 띄워줘 봄. -->
-    <p v-if="!isUsernameValid && username !== ''">
+    <p v-if="!isUsernameValid && username !== ''" class="alert">
       {{ username }}는 사용할 수 없는 id입니다.
     </p>
   </form>
@@ -57,11 +57,11 @@ export default {
           nickname: this.nickname,
         };
         const { data } = await registerUser(userData); // 여기에는 api에서 작성했던 url은 적을 필요 없이 함수의 인자로 받은 data만 적어주면 된다.
-        console.log(data.username);
-        this.logMessage = `${data.username} 님이 가입되었습니다.`;
+        console.log(data.user.username);
+        this.logMessage = `${data.user.username} 님이 가입되었습니다.`;
         this.initForm(); // input창을 clear해줌.
       } catch (error) {
-        console.log(error);
+        // console.log(error.response);
         this.logMessage = `${this.username}은 이미 가입된 id입니다. ${error}`;
       }
     },
@@ -86,4 +86,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.alert {
+  position: absolute;
+  top: 100px;
+}
+</style>

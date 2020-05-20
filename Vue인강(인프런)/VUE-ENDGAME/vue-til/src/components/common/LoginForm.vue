@@ -44,7 +44,12 @@ export default {
         };
         const { data } = await loginUser(userData);
         console.log(data.user.username);
-        this.logMessage = `${data.user.username} 님 환영합니다.`;
+        // 메인 페이지로 이동
+        console.log('이거 왜 안찍혀 뭐야뭐야!!!!!');
+        this.$router.push('/main'); // js에서 이동하는 태그.
+        // <router-link to="main">을 의미한다.  // html에서 이동하는 앵커 태그.
+
+        // this.logMessage = `${data.user.username} 님 환영합니다.`;
         // this.initForm();
       } catch (error) {
         // 에러를 핸들링할 코드
