@@ -7,13 +7,14 @@ Vue.use(Vuex); // 플러그인 형태로 되어있기 때문에 먼저 Vuex를 �
 export default new Vuex.Store({
   state: {
     username: '',
+    token: '',
   },
   getters: {
     isLogin(state) {
       return state.username !== '';
     },
   },
-  //   data를 바꾸는 것. 즉 state를 바꿈.
+  // data를 바꾸는 것. 즉 state를 바꿈.
   mutations: {
     setUsername(state, username) {
       // murations의 첫 번째 인자는 state, 두 번째 인자는 setUsername을 호출할 때 넘길 값을 의미.
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     // username을 초기화 시켜줌. = logout
     clearUsername(state) {
       state.username = '';
+    },
+    setToken(state, token) {
+      state.token = token;
     },
   },
 });

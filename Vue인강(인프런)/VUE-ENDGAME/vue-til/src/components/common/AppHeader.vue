@@ -3,16 +3,16 @@
     <div>
       <router-link to="/" class="logo">
         TIL
+        <span v-if="isUserLogin">by {{ $store.state.username }}</span>
       </router-link>
     </div>
     <div class="navigations">
       <!-- 1 -->
       <!-- <template v-if="로그인이 되었을 때"> -->
       <template v-if="isUserLogin">
-        <span class="username">{{ $store.state.username }}</span>
-
-        <!--href="javascript:;" : 기본 앵커 태그의 동작을 막는 태그-->
-        <a href="javascript:;" @click="logoutUser">Logout</a>
+        <a href="javascript:;" @click="logoutUser" class="logout-button">
+          Logout
+        </a>
       </template>
       <!-- 2 -->
       <template v-else>
@@ -36,7 +36,7 @@ export default {
       // logout
       this.$store.commit('clearUsername');
       // 기본페이지로 돌아가게 함. '/' 또는 '/login'
-      this.$router.push('/');
+      this.$router.push('/login');
     },
   },
 };
@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .username {
-  color: #fff;
+  color: white;
 }
 header {
   display: flex;
@@ -75,6 +75,9 @@ a.logo {
   position: fixed;
   top: 0;
   width: 100%;
+}
+.logout-button {
+  font-size: 14px;
 }
 a.router-link-exact-active {
   color: white;
