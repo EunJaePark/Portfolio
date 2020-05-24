@@ -1,0 +1,6 @@
+export default {
+  timestamps: {
+    createdAt: 'created_at'
+  }
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9tb2RlbHMvc2NoZW1hT3B0aW9ucy5qcyJdLCJuYW1lcyI6WyJ0aW1lc3RhbXBzIiwiY3JlYXRlZEF0Il0sIm1hcHBpbmdzIjoiQUFBQSxlQUFlO0FBQ2JBLEVBQUFBLFVBQVUsRUFBRTtBQUNWQyxJQUFBQSxTQUFTLEVBQUU7QUFERDtBQURDLENBQWYiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCB7XG4gIHRpbWVzdGFtcHM6IHtcbiAgICBjcmVhdGVkQXQ6ICdjcmVhdGVkX2F0JyxcbiAgfSxcbn07XG4iXX0=
