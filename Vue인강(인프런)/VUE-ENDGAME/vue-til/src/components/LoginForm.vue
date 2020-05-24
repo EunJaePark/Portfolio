@@ -29,8 +29,9 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/index';
+// import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation';
+// import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
 
 export default {
   data() {
@@ -55,12 +56,17 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const { data } = await loginUser(userData);
-        console.log(data.token);
-        this.$store.commit('setToken', data.token);
-        this.$store.commit('setUsername', data.user.username);
-        // this.$router.push('/main');
-        this.$router.replace('/main');
+        // await가 붙는 이유 : this.$store.dispatch는 store(index.js)에서 비동기 처리가 끝나고 난 후 LoginForm에서 router로 진입(/main페이지로 진입)해야하기 때문에 넣어주는 것이다.
+        await this.$store.dispatch('LOGIN', userData);
+        // const { data } = await loginUser(userData);
+        // console.log(data.token);
+        // this.$store.commit('setToken', data.token);
+        // this.$store.commit('setUsername', data.user.username);
+
+        // saveAuthToCookie(data.token);
+        // saveUserToCookie(data.user.username);
+
+        this.$router.push('/main');
       } catch (error) {
         // 에러 핸들링할 코드
         console.log(error.response.data);

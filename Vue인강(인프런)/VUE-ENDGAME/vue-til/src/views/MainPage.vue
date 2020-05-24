@@ -2,9 +2,6 @@
   <div>
     <div class="main list-container contents">
       <h1 class="page-header">Today I Learned</h1>
-      <div v-if="isLoading">
-        Loading...
-      </div>
       <LoadingSpinner v-if="isLoading"></LoadingSpinner>
       <ul v-else>
         <PostListItem
@@ -37,7 +34,6 @@ export default {
     async fetchData() {
       this.isLoading = true;
       const { data } = await fetchPosts();
-      console.log(data.posts);
       this.isLoading = false;
       this.postItems = data.posts;
     },

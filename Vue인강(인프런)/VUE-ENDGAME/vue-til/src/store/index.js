@@ -1,13 +1,20 @@
-import Vue from 'vue'; // vue를 들여오고
-import Vuex from 'vuex'; // vuex를 들여오고
+import Vue from 'vue';
+import Vuex from 'vuex';
+import {
+  getAuthFromCookie,
+  getUserFromCookie,
+  saveAuthToCookie,
+  saveUserToCookie,
+} from '@/utils/cookies';
+import { loginUser } from '@/api/index';
 
-Vue.use(Vuex); // 플러그인 형태로 되어있기 때문에 먼저 Vuex를 설치. 초기화라고 보면 된다.
+Vue.use(Vuex);
 
 // vuex의 인스턴스를 export 하는 것.
 export default new Vuex.Store({
   state: {
-    username: '',
-    token: '',
+    username: getUserFromCookie() || '',
+    token: getAuthFromCookie() || '',
   },
   getters: {
     isLogin(state) {
@@ -26,6 +33,24 @@ export default new Vuex.Store({
     },
     setToken(state, token) {
       state.token = token;
+    },
+  },
+  actions: {
+    // LOGIN(context) { // context안에는 { commit }이 제공된다.
+    async LOGIN({ commit }, userData) {
+      // async는 무조건 promise가 리턴된다.
+      // 하지만, 나중에 활용될 수도 있을 데이터 속성들을 위해서 마지막에 return data;를 넣어준다.(명시적인 의미에서)
+      // loginUser();
+      const { data } = await loginUser(userData);
+      console.log(data.token);
+      commit('setToken', data.token);
+      commit('setUsername', data.user.username);
+      // 이 파일이 store이기 때문에 this.$store를 지운다.
+
+      saveAuthToCookie(data.token);
+      saveUserToCookie(data.user.username);
+
+      return data;
     },
   },
 });
