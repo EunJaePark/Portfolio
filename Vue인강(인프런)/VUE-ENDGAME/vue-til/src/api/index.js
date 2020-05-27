@@ -22,31 +22,9 @@ function createInstanceWithAuth(url) {
 }
 
 export const instance = createInstance();
-export const posts = createInstanceWithAuth('posts'); // 기본 url이 항상 posts가 된 변수.
+export const posts = createInstanceWithAuth('posts');
 
-// // 회원가입 API
-// function registerUser(userData) {
-//   return instance.post('signup', userData);
-// }
-
-// // 로그인 API
-// function loginUser(userData) {
-//   return instance.post('login', userData);
-// }
-
-// // 학습 노트 데이터를 조회하는 API
-// function fetchPosts() {
-//   return instance.get('posts');
-// }
-
-// // 학습 노트 데이터를 생성하는 API
-// function createPost(postData) {
-//   return instance.post('posts', postData);
-// }
-
-// GET - posts
+// CREATE - posts
 // POST - posts
 // PUT - posts {id}
 // DELETE - posts {id}
-
-// export { fetchPosts, createPost };
