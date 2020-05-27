@@ -6,7 +6,7 @@ import {
   saveAuthToCookie,
   saveUserToCookie,
 } from '@/utils/cookies';
-import { loginUser } from '@/api/index';
+import { loginUser } from '@/api/auth';
 
 Vue.use(Vuex);
 
@@ -49,7 +49,6 @@ export default new Vuex.Store({
 
       saveAuthToCookie(data.token);
       saveUserToCookie(data.user.username);
-
       return data;
     },
   },
