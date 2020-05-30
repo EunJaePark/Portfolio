@@ -7,8 +7,8 @@
       {{ postItem.contents }}
     </div>
     <div class="post-time">
-      {{ postItem.createdAt }}
-      <i class="icon ion-md-create"></i>
+      {{ postItem.createdAt | formatDate }}
+      <i class="icon ion-md-create" @click="routeEditPage"></i>
       <i class="icon ion-md-trash" @click="deleteItem"></i>
     </div>
   </li>
@@ -24,14 +24,23 @@ export default {
       required: true,
     },
   },
+  // filters: {
+  //   formatDate(value) {
+  //     return new Date(value);
+  //   },
+  // },
   methods: {
     async deleteItem() {
-      if (confirm('You want to delete ie?')) {
+      if (confirm('You want to delete it?')) {
         await deletePost(this.postItem._id);
         // refresh를 MainPage로 올려보내준다.
         this.$emit('refresh');
-        console.log('deleted');
       }
+      // console.log('deleted');
+    },
+    routeEditPage() {
+      const id = this.postItem._id;
+      this.$router.push(`/post/${id}`);
     },
   },
 };
