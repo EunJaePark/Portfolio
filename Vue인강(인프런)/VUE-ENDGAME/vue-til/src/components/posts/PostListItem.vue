@@ -24,11 +24,6 @@ export default {
       required: true,
     },
   },
-  // filters: {
-  //   formatDate(value) {
-  //     return new Date(value);
-  //   },
-  // },
   methods: {
     async deleteItem() {
       if (confirm('You want to delete it?')) {
@@ -36,7 +31,6 @@ export default {
         // refresh를 MainPage로 올려보내준다.
         this.$emit('refresh');
       }
-      // console.log('deleted');
     },
     routeEditPage() {
       const id = this.postItem._id;
