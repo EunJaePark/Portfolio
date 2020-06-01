@@ -19,6 +19,7 @@
           :disabled="!isUsernameValid || !password"
           type="submit"
           class="btn"
+          :class="!isUsernameValid || !password ? 'disabled' : null"
         >
           로그인
         </button>
@@ -54,7 +55,6 @@ export default {
           username: this.username,
           password: this.password,
         };
-        // await가 붙는 이유 : this.$store.dispatch는 store(index.js)에서 비동기 처리가 끝나고 난 후 LoginForm에서 router로 진입(/main페이지로 진입)해야하기 때문에 넣어주는 것이다.
         await this.$store.dispatch('LOGIN', userData);
         this.$router.push('/main');
       } catch (error) {

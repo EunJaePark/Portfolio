@@ -8,7 +8,6 @@
     </div>
     <div class="navigations">
       <!-- 1 -->
-      <!-- <template v-if="로그인이 되었을 때"> -->
       <template v-if="isUserLogin">
         <a href="javascript:;" @click="logoutUser" class="logout-button">
           Logout
@@ -29,7 +28,6 @@ import { deleteCookie } from '@/utils/cookies';
 export default {
   computed: {
     isUserLogin() {
-      // store가 vue인스턴스에 연결되어있기 때문에 this로 접근이 가능한 것이다.
       return this.$store.getters.isLogin;
     },
     logoLink() {
@@ -38,12 +36,10 @@ export default {
   },
   methods: {
     logoutUser() {
-      // logout
       this.$store.commit('clearUsername');
       this.$store.commit('clearToken');
       deleteCookie('til_auth');
       deleteCookie('til_user');
-      // 기본페이지로 돌아가게 함. '/' 또는 '/login'
       this.$router.push('/login');
     },
   },
